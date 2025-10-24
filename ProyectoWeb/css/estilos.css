@@ -1,0 +1,119 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(to right, #f8f9fa, #e9ecef);
+    color: #333;
+}
+
+/* Cabecera */
+header {
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Top-bar: login y sucursal */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 50px;
+    margin-bottom: 10px;
+}
+
+.top-bar .login a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    background: rgba(0,0,0,0.2);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.top-bar .login a:hover {
+    background: rgba(0,0,0,0.4);
+}
+
+.top-bar .sucursal-dropdown select {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: none;
+}
+
+/* Contenido principal */
+main {
+    padding: 30px 50px;
+}
+
+/* Platos destacados */
+.platos {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.plato {
+    min-width: 250px;
+    background: linear-gradient(to bottom, #ffffff, #ffe0b2);
+    border-radius: 15px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    flex-shrink: 0;
+}
+
+.plato h4 {
+    margin-bottom: 10px;
+}
+
+.plato p {
+    font-weight: bold;
+    color: #ff5722;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    color: white;
+    margin-top: 50px;
+}
+
+/* Scrollbar personalizado para carrusel */
+.platos::-webkit-scrollbar {
+    height: 10px;
+}
+
+.platos::-webkit-scrollbar-thumb {
+    background: #ff7e5f;
+    border-radius: 5px;
+}
