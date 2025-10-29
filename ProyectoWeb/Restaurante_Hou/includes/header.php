@@ -3,6 +3,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 include 'config.php';
+
+// Detectar la sección activa
+$pagina_actual = basename($_SERVER['PHP_SELF']);
+$activo_inicio = in_array($pagina_actual, ['index.php']) ? 'active' : '';
+$activo_platos = in_array($pagina_actual, ['platos.php', 'detalle_plato.php']) ? 'active' : '';
 ?>
 
 <!DOCTYPE html>
@@ -15,15 +20,10 @@ include 'config.php';
 <body>
 <header>
     <div class="top-bar" style="display: flex; justify-content: space-between; align-items: center; padding: 0 40px;">
-        <!-- Logo a la izquierda -->
         <div class="logo">
             <h1 style="margin: 0;">Restaurante Hou</h1>
         </div>
-
-        <!-- Lado derecho: login y sucursal -->
         <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
-            
-            <!-- Usuario / Login -->
             <div class="user-section">
                 <?php if(isset($_SESSION['usuario'])): ?>
                     <span class="welcome-text">👋 Bienvenido, <strong><?= htmlspecialchars($_SESSION['usuario']) ?></strong></span>
@@ -32,14 +32,7 @@ include 'config.php';
                     <a href="login.php" class="login-btn">Iniciar sesión</a>
                 <?php endif; ?>
             </div>
-
-            <!-- Selección de sucursal -->
-            <!-- Selección de sucursal -->
             <div class="sucursal-dropdown">
-                <?php
-                    // Detectar automáticamente en qué página estás
-                    $pagina_actual = basename($_SERVER['PHP_SELF']);
-                ?>
                 <form method="GET" action="<?= htmlspecialchars($pagina_actual) ?>">
                     <select name="id_sucursal" id="sucursal" onchange="this.form.submit()">
                         <option value="">Seleccione sucursal</option>
@@ -57,8 +50,8 @@ include 'config.php';
     </div>
 
     <nav style="text-align:center; margin-top:10px;">
-        <a href="index.php">Inicio</a> |
-        <a href="platos.php">Platos</a>
+        <a href="index.php" class="<?= $activo_inicio ?>">Inicio</a>
+        <a href="platos.php" class="<?= $activo_platos ?>">Platos</a>
     </nav>
 </header>
 <main>

@@ -21,9 +21,10 @@ $id_sucursal = isset($_GET['id_sucursal']) ? (int)$_GET['id_sucursal'] : null;
             <div class="platos">
                 <?php
                 $platos = $conn->query("SELECT p.* FROM Plato p
-                                        JOIN Ofrece o ON p.codigo_plato = o.codigo_plato
-                                        WHERE o.id_sucursal = $id_sucursal
-                                        ORDER BY RAND() LIMIT 8");
+                        JOIN Ofrece o ON p.codigo_plato = o.codigo_plato
+                        WHERE o.id_sucursal = $id_sucursal
+                        AND p.disponible = 1
+                        ORDER BY RAND() LIMIT 8");
                 while($plato = $platos->fetch_assoc()):
                 ?>
                     <div class="plato" data-codigo="<?= $plato['codigo_plato'] ?>">

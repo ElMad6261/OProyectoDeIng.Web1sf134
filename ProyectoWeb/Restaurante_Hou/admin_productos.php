@@ -14,8 +14,8 @@ if (!$id_sucursal) {
     die("No se ha seleccionado una sucursal.");
 }
 
-$mensaje = '';
 $error = '';
+$mensaje = '';
 
 // -------------------- CRUD PRODUCTOS --------------------
 
@@ -39,9 +39,16 @@ if (isset($_POST['agregar'])) {
     }
 }
 
+// Cargar producto para modificar
+$editarProducto = null;
+if (isset($_GET['modificar'])) {
+    $codigo = intval($_GET['modificar']);
+    $editarProducto = $conn->query("SELECT * FROM producto WHERE codigo_producto = $codigo")->fetch_assoc();
+}
+
 // Modificar producto
 if (isset($_POST['modificar'])) {
-    $codigo = intval($_POST['codigo']);
+    $codigo = intval($_POST['codigo_producto']);
     $nombre = trim($_POST['nombre']);
     $precio = trim($_POST['precio']);
     $descripcion = trim($_POST['descripcion']);
@@ -54,6 +61,8 @@ if (isset($_POST['modificar'])) {
         $stmt->bind_param("sdssi", $nombre, $precio, $descripcion, $tipo, $codigo);
         if ($stmt->execute()) {
             $mensaje = "Producto modificado correctamente.";
+            // Recargar producto modificado
+            $editarProducto = null;
         } else {
             $error = $stmt->error;
         }
@@ -78,7 +87,6 @@ if (isset($_GET['eliminar'])) {
 
 // Obtener productos
 $productos = $conn->query("SELECT * FROM producto");
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -96,17 +104,29 @@ $productos = $conn->query("SELECT * FROM producto");
     <?php if($mensaje): ?><p class="success"><?= htmlspecialchars($mensaje) ?></p><?php endif; ?>
     <?php if($error): ?><p class="error"><?= htmlspecialchars($error) ?></p><?php endif; ?>
 
-    <!-- Formulario agregar producto -->
-    <h3>Agregar Producto</h3>
-    <form method="POST" class="admin-form">
-        <input type="text" name="nombre" placeholder="Nombre" required>
-        <input type="number" step="0.01" name="precio" placeholder="Precio" required>
-        <input type="text" name="descripcion" placeholder="Descripción" required>
-        <input type="text" name="tipo_producto" placeholder="Tipo" required>
-        <button type="submit" name="agregar">Agregar</button>
-    </form>
+    <!-- Formulario Agregar/Modificar -->
+    <?php if($editarProducto): ?>
+        <h3>Modificar Producto</h3>
+        <form method="POST" class="admin-form">
+            <input type="hidden" name="codigo_producto" value="<?= $editarProducto['codigo_producto'] ?>">
+            <input type="text" name="nombre" value="<?= htmlspecialchars($editarProducto['nombre']) ?>" placeholder="Nombre" required>
+            <input type="number" step="0.01" name="precio" value="<?= $editarProducto['precio'] ?>" placeholder="Precio" required>
+            <input type="text" name="descripcion" value="<?= htmlspecialchars($editarProducto['descripcion']) ?>" placeholder="Descripción" required>
+            <input type="text" name="tipo_producto" value="<?= htmlspecialchars($editarProducto['tipo_producto']) ?>" placeholder="Tipo" required>
+            <button type="submit" name="modificar">Guardar Cambios</button>
+        </form>
+    <?php else: ?>
+        <h3>Agregar Producto</h3>
+        <form method="POST" class="admin-form">
+            <input type="text" name="nombre" placeholder="Nombre" required>
+            <input type="number" step="0.01" name="precio" placeholder="Precio" required>
+            <input type="text" name="descripcion" placeholder="Descripción" required>
+            <input type="text" name="tipo_producto" placeholder="Tipo" required>
+            <button type="submit" name="agregar">Agregar</button>
+        </form>
+    <?php endif; ?>
 
-    <!-- Tabla de productos -->
+    <!-- Tabla de Productos -->
     <h3>Lista de Productos</h3>
     <table class="admin-table">
         <thead>
@@ -130,11 +150,12 @@ $productos = $conn->query("SELECT * FROM producto");
                 <td><?= htmlspecialchars($p['tipo_producto']) ?></td>
                 <td><?= $p['disponible'] ? 'Sí' : 'No' ?></td>
                 <td>
+                    <a href="admin_productos.php?id_sucursal=<?= $id_sucursal ?>&modificar=<?= $p['codigo_producto'] ?>" class="btn-modificar">Modificar</a>
                     <a href="admin_productos.php?id_sucursal=<?= $id_sucursal ?>&cambiar_disponibilidad=<?= $p['codigo_producto'] ?>" class="btn-disponibilidad">
                         <?= $p['disponible'] ? 'Deshabilitar' : 'Habilitar' ?>
                     </a>
-                    <a href="admin_productos.php?id_sucursal=<?= $id_sucursal ?>&eliminar=<?= $p['codigo_producto'] ?>" class="btn-eliminar">Eliminar</a>
-                    <a href="admin_modificar_producto.php?id_sucursal=<?= $id_sucursal ?>&codigo=<?= $p['codigo_producto'] ?>" class="btn-modificar">Modificar</a>
+                    <a href="admin_productos.php?id_sucursal=<?= $id_sucursal ?>&eliminar=<?= $p['codigo_producto'] ?>" class="btn-eliminar"
+                       onclick="return confirm('¿Seguro que deseas eliminar este producto?');">Eliminar</a>
                 </td>
             </tr>
             <?php endwhile; ?>
