@@ -3,8 +3,8 @@ session_start();
 include 'config.php';
 include 'includes/header.php';
 
-// Obtener id de sucursal si viene por GET
-$id_sucursal = isset($_GET['id_sucursal']) ? (int)$_GET['id_sucursal'] : null;
+// Obtener id de sucursal (desde GET o sesión)
+$id_sucursal = $_GET['id_sucursal'] ?? ($_SESSION['id_sucursal'] ?? null);
 ?>
 
 <div class="container">
@@ -28,10 +28,10 @@ $id_sucursal = isset($_GET['id_sucursal']) ? (int)$_GET['id_sucursal'] : null;
                 while($plato = $platos->fetch_assoc()):
                 ?>
                     <div class="plato" data-codigo="<?= $plato['codigo_plato'] ?>">
-                        <img src="<?= $plato['imagen'] ?>" alt="<?= htmlspecialchars($plato['nombre']) ?>">
+                        <img src="<?= htmlspecialchars($plato['imagen']) ?>" alt="<?= htmlspecialchars($plato['nombre']) ?>">
                         <h4><?= htmlspecialchars($plato['nombre']) ?></h4>
                         <p><b>Tipo:</b> <?= htmlspecialchars($plato['tipo']) ?></p>
-                        <p><b>Precio:</b> $<?= $plato['precio'] ?></p>
+                        <p><b>Precio:</b> $<?= number_format($plato['precio'], 2) ?></p>
                     </div>
                 <?php endwhile; ?>
             </div>

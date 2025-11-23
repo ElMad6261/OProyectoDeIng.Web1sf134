@@ -2,19 +2,15 @@
 include 'config.php';
 include 'includes/header.php';
 
-// Obtener sucursal seleccionada desde GET
-$id_sucursal = isset($_GET['id_sucursal']) ? $_GET['id_sucursal'] : '';
-
-// Obtener tipo seleccionado
-$tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '';
+// Obtener sucursal (de GET o sesión)
+$id_sucursal = $_GET['id_sucursal'] ?? ($_SESSION['id_sucursal'] ?? '');
+$tipo = $_GET['tipo'] ?? '';
 ?>
 
 <h2 style="text-align:center; margin-bottom:20px;">Todos los Platos Disponibles</h2>
 
 <!-- Filtro por tipo -->
 <form method="GET" action="platos.php" style="margin-bottom:20px; text-align:center;">
-    
-    <!-- Mantener la sucursal seleccionada -->
     <?php if($id_sucursal != ''): ?>
         <input type="hidden" name="id_sucursal" value="<?php echo htmlspecialchars($id_sucursal); ?>">
     <?php endif; ?>
@@ -30,28 +26,22 @@ $tipo = isset($_GET['tipo']) ? $_GET['tipo'] : '';
 
 <div class="platos-container">
 <?php
-
-// Si no se seleccionó ninguna sucursal, no mostrar platos
 if ($id_sucursal == '') {
     echo "<p style='text-align:center;'>Por favor seleccione una sucursal para ver los platos disponibles.</p>";
 } else {
-    // Consulta filtrada por sucursal usando OFRECE
     $sql = "SELECT p.codigo_plato, p.nombre, p.descripcion, p.precio, p.imagen, p.tipo
             FROM Plato p
-            INNER JOIN ofrece o ON p.codigo_plato = o.codigo_plato
+            INNER JOIN Ofrece o ON p.codigo_plato = o.codigo_plato
             WHERE o.id_sucursal = ".$conn->real_escape_string($id_sucursal)."
-            AND p.disponible = 1"; // solo habilitados
+            AND p.disponible = 1";
 
-    // Aplicar filtro por tipo si se seleccionó
     if ($tipo != '') {
         $sql .= " AND p.tipo = '".$conn->real_escape_string($tipo)."'";
     }
 
     $sql .= " ORDER BY p.nombre ASC";
-
     $result = $conn->query($sql);
 
-    // Mostrar platos
     if($result && $result->num_rows > 0){
         while($plato = $result->fetch_assoc()){
             echo "<div class='plato' data-codigo='".htmlspecialchars($plato['codigo_plato'])."'>";

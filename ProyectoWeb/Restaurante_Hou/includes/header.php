@@ -4,6 +4,14 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 include 'config.php';
 
+// Guardar sucursal seleccionada en sesión si llega por GET
+if (isset($_GET['id_sucursal']) && $_GET['id_sucursal'] !== '') {
+    $_SESSION['id_sucursal'] = $_GET['id_sucursal'];
+}
+
+// Obtener la sucursal activa (desde GET o desde la sesión)
+$id_sucursal_actual = $_GET['id_sucursal'] ?? ($_SESSION['id_sucursal'] ?? '');
+
 // Detectar la sección activa
 $pagina_actual = basename($_SERVER['PHP_SELF']);
 $activo_inicio = in_array($pagina_actual, ['index.php']) ? 'active' : '';
@@ -22,7 +30,16 @@ $activo_platos = in_array($pagina_actual, ['platos.php', 'detalle_plato.php']) ?
     <div class="top-bar" style="display: flex; justify-content: space-between; align-items: center; padding: 0 40px;">
         <div class="logo">
             <h1 style="margin: 0;">Restaurante Hou</h1>
+            <?php if ($id_sucursal_actual): ?>
+                <?php
+                // Mantiene la lógica de validación sin mostrar el nombre visualmente
+                $nombreSucursal = $conn->query("SELECT nombre FROM Sucursal WHERE id_sucursal = $id_sucursal_actual")->fetch_assoc();
+                // No mostramos nada aquí, solo guardamos la información si se necesita más adelante
+                ?>
+            <?php endif; ?>
         </div>
+
+
         <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 6px;">
             <div class="user-section">
                 <?php if(isset($_SESSION['usuario'])): ?>
@@ -32,14 +49,16 @@ $activo_platos = in_array($pagina_actual, ['platos.php', 'detalle_plato.php']) ?
                     <a href="login.php" class="login-btn">Iniciar sesión</a>
                 <?php endif; ?>
             </div>
-            <div class="sucursal-dropdown">
-                <form method="GET" action="<?= htmlspecialchars($pagina_actual) ?>">
-                    <select name="id_sucursal" id="sucursal" onchange="this.form.submit()">
+            <div class="sucursal-dropdown" style="text-align:right;">
+                <br>
+                <p style="margin:0; font-size:14px; color:#333; font-weight:bold;">Escoja una sucursal:</p>
+                <form method="GET" action="<?= htmlspecialchars($pagina_actual) ?>" style="margin-top:4px;">
+                    <select name="id_sucursal" id="sucursal" onchange="this.form.submit()" style="padding:6px; border-radius:5px; min-width:180px;">
                         <option value="">Seleccione sucursal</option>
                         <?php
                         $result = $conn->query("SELECT id_sucursal, nombre FROM Sucursal");
                         while($row = $result->fetch_assoc()){
-                            $selected = (isset($_GET['id_sucursal']) && $_GET['id_sucursal'] == $row['id_sucursal']) ? 'selected' : '';
+                            $selected = ($id_sucursal_actual == $row['id_sucursal']) ? 'selected' : '';
                             echo "<option value='{$row['id_sucursal']}' $selected>{$row['nombre']}</option>";
                         }
                         ?>
