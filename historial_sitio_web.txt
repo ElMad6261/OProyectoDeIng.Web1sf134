@@ -1,0 +1,4 @@
+197aa0c VERSIÓN FINAL del proyecto Restaurante_Hou (zip 4) — lista para entregar
+9880578 Correcciones finales del mes pasado, agregado de query del SQL, corecciones con backend en el sistema de filtros y estabilidad en el apartado de administracion. (Restaurante_Hou(3).zip)
+74f9a19 Actualización intermedia del sitio. Creacion de paginas principal, backend con platos, login, register
+ec9aa61 Versión inicial del sitio web desde Restaurante_Hou.zip (borrador) Parte del frontend y backend creado
