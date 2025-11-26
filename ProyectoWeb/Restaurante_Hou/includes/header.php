@@ -27,9 +27,9 @@ $activo_platos = in_array($pagina_actual, ['platos.php', 'detalle_plato.php']) ?
 </head>
 <body>
 <header>
-    <div class="top-bar" style="display: flex; justify-content: space-between; align-items: center; padding: 0 40px;">
+    <div class="top-bar">
         <div class="logo">
-            <h1 style="margin: 0;">Restaurante Hou</h1>
+            <h1>Restaurante Hou</h1>
             <?php if ($id_sucursal_actual): ?>
                 <?php
                 // Mantiene la lógica de validación sin mostrar el nombre visualmente

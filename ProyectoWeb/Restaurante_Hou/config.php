@@ -1,8 +1,8 @@
 <?php
 // Datos de conexión
-$servername = "localhost";   // Normalmente localhost en XAMPP
-$username = "root";          // Usuario por defecto en XAMPP
-$password = "";              // Contraseña por defecto vacía en XAMPP
+$servername = "localhost";   // Normalmente localhost
+$username = "root";          // Usuario por defecto
+$password = "";              // Contraseña por defecto
 $dbname = "restaurante";     // Nombre de tu base de datos
 
 // Crear conexión

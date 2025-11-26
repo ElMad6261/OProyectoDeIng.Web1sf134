@@ -66,7 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <?php if (isset($error)) echo "<p class='error'>$error</p>"; ?>
 
         <form method="POST" action="">
-            <label for="correo">Usuario o Código:</label>
+            <label for="correo">Correo electrónico</label>
             <input type="text" name="correo" id="correo" required>
 
             <label for="clave">Contraseña:</label>
