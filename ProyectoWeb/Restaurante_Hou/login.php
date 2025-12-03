@@ -2,6 +2,11 @@
 include 'config.php';
 session_start();
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $correo = trim($_POST['correo']); // puede ser correo o código de empleado
     $clave = trim($_POST['clave']);

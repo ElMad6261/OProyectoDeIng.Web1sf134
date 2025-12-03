@@ -30,8 +30,8 @@ if ($id_sucursal == '') {
     echo "<p style='text-align:center;'>Por favor seleccione una sucursal para ver los platos disponibles.</p>";
 } else {
     $sql = "SELECT p.codigo_plato, p.nombre, p.descripcion, p.precio, p.imagen, p.tipo
-            FROM Plato p
-            INNER JOIN Ofrece o ON p.codigo_plato = o.codigo_plato
+            FROM plato p
+            INNER JOIN ofrece o ON p.codigo_plato = o.codigo_plato
             WHERE o.id_sucursal = ".$conn->real_escape_string($id_sucursal)."
             AND p.disponible = 1";
 

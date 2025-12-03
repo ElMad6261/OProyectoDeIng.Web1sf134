@@ -95,7 +95,7 @@ nav a:hover {
     color: Black;
     font-weight: bold;
     text-decoration: none;
-    background: #87CEEB;
+    background: #ff7e5f;
     padding: 6px 12px;
     border-radius: 5px;
     transition: background 0.3s;
@@ -112,7 +112,7 @@ nav a:hover {
 }
 
 .login-btn:hover {
-    background: #43a047;
+    background: #c0392b;
 }
 
 .logout-btn:hover {
@@ -486,7 +486,7 @@ footer {
 
 /* Botón eliminar */
 .btn-eliminar {
-    background-color: #e74c3c;
+    background-color: #ff7e5f;
 }
 .btn-eliminar:hover {
     background-color: #c0392b;
@@ -494,19 +494,19 @@ footer {
 
 /* Botón modificar */
 .btn-modificar {
-    background-color: #3498db;
+    background-color: #ff7e5f;
 }
 .btn-modificar:hover {
-    background-color: #2980b9;
+    background-color: #c0392b;
 }
 
 /* Botón disponibilidad */
 .btn-disponibilidad {
-    background-color: #f1c40f;
+    background-color: #ff7e5f;
     color: black;
 }
 .btn-disponibilidad:hover {
-    background-color: #d4ac0d;
+    background-color: #c0392b;
 }
 
 /* ======= MENSAJES ======= */
@@ -625,7 +625,7 @@ footer {
 /* ======= BOTÓN GESTIONAR ======= */
 .btn-gestionar {
     display: inline-block;
-    background-color: #4CAF50;
+    background-color: #ff7e5f;
     color: black;
     padding: 8px 14px;
     border-radius: 6px;
@@ -634,7 +634,7 @@ footer {
     transition: all 0.3s ease;
 }
 .btn-gestionar:hover {
-    background-color: #43a047;
+    background-color: #c0392b;
     transform: translateY(-2px);
 }
 
@@ -808,13 +808,19 @@ footer {
     background-color: #218838;
 }
 .camarero-form .platos-checkboxes {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
+    display: flex;       /* Coloca los platos como tarjetas */
+    flex-wrap: wrap;     /* Permite que bajen a nuevas filas */
+    gap: 16px;           /* Espacio entre cada tarjeta */
 }
+
 .camarero-form .platos-checkboxes label {
+    display: flex;               /* Para que el texto y el input vayan en columna */
+    flex-direction: column;
+    min-width: 220px;            /* Evita que la tarjeta se vuelva demasiado angosta */
+    flex: 1 1 220px;             /* Se adapta al ancho disponible de forma uniforme */
     font-weight: normal;
 }
+
 .camarero-form .total-monto {
     font-weight: bold;
     margin-top: 10px;
@@ -884,14 +890,14 @@ footer {
     display: inline-block;
     margin: 5px;
     padding: 10px 15px;
-    background-color: #28a745;
+    background-color: #ff7e5f;
     color: black;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
 }
 .camarero-sucursal-card a.ver-pedidos {
-    background-color: #ffc107;
+    background-color: #ff7e5f;
     color: black;
 }
 .camarero-sucursal-card a:hover {
@@ -975,4 +981,18 @@ footer {
         font-size: 13px;
         padding: 8px 0;
     }
+}
+
+.camarero-form .platos-checkboxes {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 16px;
+}
+
+.camarero-form .platos-checkboxes label {
+    display: flex;
+    flex-direction: column;
+    min-width: 220px;
+    flex: 1 1 220px;
+    font-weight: normal;
 }

@@ -10,7 +10,7 @@ if (!isset($_SESSION['rol']) || $_SESSION['rol'] !== 'camarero') {
 }
 
 // Obtener todas las sucursales
-$sucursales = $conn->query("SELECT * FROM Sucursal");
+$sucursales = $conn->query("SELECT * FROM sucursal");
 ?>
 
 <div class="container">

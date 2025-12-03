@@ -108,20 +108,92 @@ $productos = $conn->query("SELECT * FROM producto");
     <?php if($editarProducto): ?>
         <h3>Modificar Producto</h3>
         <form method="POST" class="admin-form">
-            <input type="hidden" name="codigo_producto" value="<?= $editarProducto['codigo_producto'] ?>">
-            <input type="text" name="nombre" value="<?= htmlspecialchars($editarProducto['nombre']) ?>" placeholder="Nombre" required>
-            <input type="number" step="0.01" name="precio" value="<?= $editarProducto['precio'] ?>" placeholder="Precio" required>
-            <input type="text" name="descripcion" value="<?= htmlspecialchars($editarProducto['descripcion']) ?>" placeholder="Descripción" required>
-            <input type="text" name="tipo_producto" value="<?= htmlspecialchars($editarProducto['tipo_producto']) ?>" placeholder="Tipo" required>
-            <button type="submit" name="modificar">Guardar Cambios</button>
+
+            <input type="hidden" 
+                name="codigo_producto" 
+                value="<?= $editarProducto['codigo_producto'] ?>">
+
+            <div class="form-group">
+                <label for="nombre_producto">Nombre:</label>
+                <input type="text" 
+                    id="nombre_producto"
+                    name="nombre" 
+                    value="<?= htmlspecialchars($editarProducto['nombre']) ?>" 
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="precio_producto">Precio:</label>
+                <input type="number" 
+                    id="precio_producto"
+                    name="precio" 
+                    step="0.01"
+                    value="<?= $editarProducto['precio'] ?>" 
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion_producto">Descripción:</label>
+                <input type="text" 
+                    id="descripcion_producto"
+                    name="descripcion" 
+                    value="<?= htmlspecialchars($editarProducto['descripcion']) ?>" 
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="tipo_producto">Tipo de producto:</label>
+                <input type="text" 
+                    id="tipo_producto"
+                    name="tipo_producto" 
+                    value="<?= htmlspecialchars($editarProducto['tipo_producto']) ?>" 
+                    required>
+            </div>
+
+            <button type="submit" name="modificar" class="btn-guardar">Guardar Cambios</button>
         </form>
+
     <?php else: ?>
         <h3>Agregar Producto</h3>
         <form method="POST" class="admin-form">
-            <input type="text" name="nombre" placeholder="Nombre" required>
-            <input type="number" step="0.01" name="precio" placeholder="Precio" required>
-            <input type="text" name="descripcion" placeholder="Descripción" required>
-            <input type="text" name="tipo_producto" placeholder="Tipo" required>
+
+            <div class="form-group">
+                <label for="nombre_nuevo">Nombre:</label>
+                <input type="text" 
+                    id="nombre_nuevo"
+                    name="nombre" 
+                    placeholder="Nombre" 
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="precio_nuevo">Precio:</label>
+                <input type="number" 
+                    id="precio_nuevo"
+                    name="precio" 
+                    step="0.01" 
+                    placeholder="Precio" 
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion_nueva">Descripción:</label>
+                <input type="text" 
+                    id="descripcion_nueva"
+                    name="descripcion" 
+                    placeholder="Descripción" 
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="tipo_nuevo">Tipo de producto:</label>
+                <input type="text" 
+                    id="tipo_nuevo"
+                    name="tipo_producto" 
+                    placeholder="Tipo" 
+                    required>
+            </div>
+
             <button type="submit" name="agregar">Agregar</button>
         </form>
     <?php endif; ?>
@@ -155,7 +227,7 @@ $productos = $conn->query("SELECT * FROM producto");
                         <?= $p['disponible'] ? 'Deshabilitar' : 'Habilitar' ?>
                     </a>
                     <a href="admin_productos.php?id_sucursal=<?= $id_sucursal ?>&eliminar=<?= $p['codigo_producto'] ?>" class="btn-eliminar"
-                       onclick="return confirm('¿Seguro que deseas eliminar este producto?');">Eliminar</a>
+                        onclick="return confirm('¿Seguro que deseas eliminar este producto?');">Eliminar</a>
                 </td>
             </tr>
             <?php endwhile; ?>

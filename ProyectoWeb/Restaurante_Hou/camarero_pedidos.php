@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         foreach ($platos_cantidades as $codigo_plato => $cantidad) {
             $cantidad = intval($cantidad);
             if ($cantidad > 0) {
-                $stmt = $conn->prepare("SELECT nombre, precio FROM Plato WHERE codigo_plato = ?");
+                $stmt = $conn->prepare("SELECT nombre, precio FROM plato WHERE codigo_plato = ?");
                 $stmt->bind_param("i", $codigo_plato);
                 $stmt->execute();
                 $result = $stmt->get_result();
@@ -69,8 +69,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Obtener platos disponibles según sucursal
 $platos = [];
 if ($id_sucursal) {
-    $sql = "SELECT p.* FROM Plato p
-            INNER JOIN Ofrece o ON p.codigo_plato = o.codigo_plato
+    $sql = "SELECT p.* FROM plato p
+            INNER JOIN ofrece o ON p.codigo_plato = o.codigo_plato
             WHERE o.id_sucursal = $id_sucursal AND p.disponible = 1
             ORDER BY p.nombre ASC";
     $result = $conn->query($sql);

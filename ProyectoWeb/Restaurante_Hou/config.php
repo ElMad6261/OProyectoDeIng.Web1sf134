@@ -1,9 +1,9 @@
 <?php
 // Datos de conexión
-$servername = "localhost";   // Normalmente localhost
-$username = "root";          // Usuario por defecto
-$password = "";              // Contraseña por defecto
-$dbname = "restaurante";     // Nombre de tu base de datos
+$servername = "sql100.infinityfree.com";   // Normalmente localhost
+$username = "if0_40495384";          // Usuario por defecto
+$password = "RestauranteHou";              // Contraseña por defecto
+$dbname = "if0_40495384_restaurante";     // Nombre de tu base de datos
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $dbname);

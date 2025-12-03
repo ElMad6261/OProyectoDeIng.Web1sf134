@@ -88,23 +88,129 @@ $platos = $conn->query("SELECT * FROM plato");
         <h3>Modificar Plato</h3>
         <form method="POST" class="admin-form">
             <input type="hidden" name="codigo_plato" value="<?= $editarPlato['codigo_plato'] ?>">
-            <input type="text" name="nombre" value="<?= htmlspecialchars($editarPlato['nombre']) ?>" placeholder="Nombre" required>
-            <input type="text" name="tipo" value="<?= htmlspecialchars($editarPlato['tipo']) ?>" placeholder="Tipo" required>
-            <input type="number" step="0.01" name="precio" value="<?= $editarPlato['precio'] ?>" placeholder="Precio" required>
-            <input type="text" name="descripcion" value="<?= htmlspecialchars($editarPlato['descripcion']) ?>" placeholder="Descripción" required>
-            <input type="text" name="cedula_cocinero" value="<?= htmlspecialchars($editarPlato['cedula_cocinero']) ?>" placeholder="Cédula Cocinero" required>
-            <input type="text" name="imagen" value="<?= htmlspecialchars($editarPlato['imagen']) ?>" placeholder="URL Imagen" required>
+
+            <div class="form-group">
+                <label for="nombre_plato">Nombre:</label>
+                <input type="text"
+                       id="nombre_plato"
+                       name="nombre"
+                       value="<?= htmlspecialchars($editarPlato['nombre']) ?>"
+                       placeholder="Nombre"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="tipo_plato">Tipo:</label>
+                <input type="text"
+                       id="tipo_plato"
+                       name="tipo"
+                       value="<?= htmlspecialchars($editarPlato['tipo']) ?>"
+                       placeholder="Tipo"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="precio_plato">Precio:</label>
+                <input type="number"
+                       id="precio_plato"
+                       name="precio"
+                       step="0.01"
+                       value="<?= $editarPlato['precio'] ?>"
+                       placeholder="Precio"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion_plato">Descripción:</label>
+                <input type="text"
+                       id="descripcion_plato"
+                       name="descripcion"
+                       value="<?= htmlspecialchars($editarPlato['descripcion']) ?>"
+                       placeholder="Descripción"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="cedula_cocinero_plato">Cédula Cocinero:</label>
+                <input type="text"
+                       id="cedula_cocinero_plato"
+                       name="cedula_cocinero"
+                       value="<?= htmlspecialchars($editarPlato['cedula_cocinero']) ?>"
+                       placeholder="Cédula Cocinero"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="imagen_plato">URL Imagen:</label>
+                <input type="text"
+                       id="imagen_plato"
+                       name="imagen"
+                       value="<?= htmlspecialchars($editarPlato['imagen']) ?>"
+                       placeholder="URL Imagen"
+                       required>
+            </div>
+
             <button type="submit" name="modificar">Guardar Cambios</button>
         </form>
     <?php else: ?>
         <h3>Agregar Plato</h3>
         <form method="POST" class="admin-form">
-            <input type="text" name="nombre" placeholder="Nombre" required>
-            <input type="text" name="tipo" placeholder="Tipo" required>
-            <input type="number" step="0.01" name="precio" placeholder="Precio" required>
-            <input type="text" name="descripcion" placeholder="Descripción" required>
-            <input type="text" name="cedula_cocinero" placeholder="Cédula Cocinero" required>
-            <input type="text" name="imagen" placeholder="URL Imagen" required>
+
+            <div class="form-group">
+                <label for="nombre_plato_nuevo">Nombre:</label>
+                <input type="text"
+                       id="nombre_plato_nuevo"
+                       name="nombre"
+                       placeholder="Nombre"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="tipo_plato_nuevo">Tipo:</label>
+                <input type="text"
+                       id="tipo_plato_nuevo"
+                       name="tipo"
+                       placeholder="Tipo"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="precio_plato_nuevo">Precio:</label>
+                <input type="number"
+                       id="precio_plato_nuevo"
+                       name="precio"
+                       step="0.01"
+                       placeholder="Precio"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion_plato_nuevo">Descripción:</label>
+                <input type="text"
+                       id="descripcion_plato_nuevo"
+                       name="descripcion"
+                       placeholder="Descripción"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="cedula_cocinero_nuevo">Cédula Cocinero:</label>
+                <input type="text"
+                       id="cedula_cocinero_nuevo"
+                       name="cedula_cocinero"
+                       placeholder="Cédula Cocinero"
+                       required>
+            </div>
+
+            <div class="form-group">
+                <label for="imagen_plato_nuevo">URL Imagen:</label>
+                <input type="text"
+                       id="imagen_plato_nuevo"
+                       name="imagen"
+                       placeholder="URL Imagen"
+                       required>
+            </div>
+
             <button type="submit" name="agregar">Agregar</button>
         </form>
     <?php endif; ?>

@@ -15,7 +15,7 @@ if($codigo <= 0) {
 }
 
 // 3️⃣ Ejecutar la consulta
-$result = $conn->query("SELECT * FROM Plato WHERE codigo_plato = $codigo");
+$result = $conn->query("SELECT * FROM plato WHERE codigo_plato = $codigo");
 
 if(!$result) {
     echo "<p style='color:red;'>Error en la consulta: " . $conn->error . "</p>";
